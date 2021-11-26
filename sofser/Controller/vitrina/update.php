@@ -39,6 +39,6 @@ $sentencia = $base_de_datos->prepare("UPDATE producto SET codigoBarras = ?, nomb
 $resultado = $sentencia->execute([$codigo, $nombre, $precio, $perecedero, $empresa, $fechaVencimiento, $existencia,$stockMin,$stockBas,$stockMax,$ubicacion, $id]);
 
 if ($resultado === TRUE) {
-	header("Location: ../../View/bodega/read.php");
+	header("Location: ../../View/vitrina/read.php");
 
 } else echo "Algo salió mal. Por favor verifica que la tabla Exista, así como el ID del producto";

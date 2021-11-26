@@ -50,7 +50,7 @@ if ($producto === FALSE) {
                 <div class="container-fluid" style="height: 80%;">
                     <div class="col-xs-12">
                         <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">PRODUCTO: # <?php echo $producto->codigoBarras; ?></h4>
-                        <form method="post" action="../../Controller/bodega/update.php">
+                        <form method="post" action="../../Controller/vitrina/update.php">
                             <input type="hidden" name="id" value="<?php echo $producto->idProducto; ?>">
 
                             <label for="codigo">Código de barras:</label>
@@ -65,8 +65,8 @@ if ($producto === FALSE) {
                             <label for="ubicacion">Ubicacion</label>
                             <select class="form-select" name="ubicacion" aria-label="Default select example" aria-palceholder="Seleccione">
 
-                                <option selected value="Bodega">Bodega</option>
-                                <option value="Vitrina">Vitrina</option>
+                                <option  value="Bodega">Bodega</option>
+                                <option selected value="Vitrina">Vitrina</option>
 
                             </select>
 

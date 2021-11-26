@@ -46,7 +46,7 @@ if (!isset($_SESSION["id_usuario"])) {
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="../Bodega/read.php">Vitrina</a></li>
+                        <li><a class="dropdown-item" href="../Vitrina/read.php">Vitrina</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -62,10 +62,10 @@ if (!isset($_SESSION["id_usuario"])) {
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Comprar</a>
+                    <a class="nav-link active" aria-current="page" href="../comprar/index.php">Comprar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Vender</a>
+                    <a class="nav-link active" aria-current="page" href="../comprar/index.php">Vender</a>
                 </li>
             </ul>
             

@@ -19,7 +19,7 @@ if (isset($_GET["page"])) {
     $page = 1;
 }
 $start_from = ($page - 1) * $per_page_record;
-$query = "SELECT * FROM producto WHERE ubicacion='Bodega' LIMIT $start_from, $per_page_record ";
+$query = "SELECT * FROM producto WHERE ubicacion='Vitrina' LIMIT $start_from, $per_page_record ";
 $rs_result = mysqli_query($conn, $query);
 ?>
 
@@ -37,7 +37,7 @@ $rs_result = mysqli_query($conn, $query);
             <div class="col-sm-10 ">
                 <div class="container-fluid ">
                     <div class="col-sm-12 col-xs-12 ">
-                        <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">BODEGA</h4>
+                        <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">VITRINA</h4>
                         <div class="row">
 
                             <div class="col-1">
@@ -75,7 +75,6 @@ $rs_result = mysqli_query($conn, $query);
                                         <th scope="col">Empresa</th>
                                         <th scope="col">Stock Minimo</th>
                                         <th scope="col">Editar</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,7 +102,6 @@ $rs_result = mysqli_query($conn, $query);
                                                     <td><?php echo $row['empresa']; ?></td>
                                                     <td><?php echo $row['stockMinimo']; ?></td>
                                                     <td><a class="btn btn" style="Background-color:#21822A;color:#ffffff;" href="update.php?id=<?php echo $row['idProducto']; ?>"><i class="fa fa-edit"></i></a></td>
-                                                   
                                                 </tr>
                                             <?php }
                                         } else {
@@ -120,7 +118,6 @@ $rs_result = mysqli_query($conn, $query);
                                                     <td><?php echo $row['empresa']; ?></td>
                                                     <td><?php echo $row['stockMinimo']; ?></td>
                                                     <td><a class="btn btn" style="Background-color:#21822A;color:#ffffff;" href="update.php?id=<?php echo $row['idProducto']; ?>"><i class="fa fa-edit"></i></a></td>
-                                                    
                                                 </tr>
                                     <?php }
                                         }
