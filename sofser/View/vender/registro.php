@@ -38,15 +38,14 @@ $venta = $sentencia->fetchAll(PDO::FETCH_OBJ);
 									<th>Fecha</th>
 									<th>producto vendidos</th>
 									<th>Total</th>
-									<th>Descargar</th>
 									<th>Eliminar</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php foreach ($venta as $venta) { ?>
 									<tr>
-										<td><?php echo $venta->id ?></td>
-										<td><?php echo $venta->fecha ?></td>
+										<td><?php echo $venta->idVenta ?></td>
+										<td><?php echo $venta->fechaVenta ?></td>
 										<td>
 											<table class="table ">
 												<thead class="thead-dark">
@@ -54,6 +53,8 @@ $venta = $sentencia->fetchAll(PDO::FETCH_OBJ);
 														<th>Código</th>
 														<th>Descripción</th>
 														<th>Cantidad</th>
+														<th>proveedor</th>
+
 													</tr>
 												</thead>
 												<tbody>
@@ -64,13 +65,14 @@ $venta = $sentencia->fetchAll(PDO::FETCH_OBJ);
 															<td><?php echo $producto[0] ?></td>
 															<td><?php echo $producto[1] ?></td>
 															<td><?php echo $producto[2] ?></td>
+															<td><?php echo $producto[3] ?></td>
+
 														</tr>
 													<?php } ?>
 												</tbody>
 											</table>
 										</td>
-										<td><?php echo $venta->total ?></td>
-										<td><a class="btn btn-primary" href="<?php echo "pdf/index.php?id=" . $venta->id ?>"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></td>
+										<td><?php echo $venta->totalVenta ?></td>
 										<td><a class="btn btn-danger" href="<?php echo "Controladores/producto/eliminarVenta.php?id=" . $venta->id ?>"><i class="fa fa-trash"></i></a></td>
 									</tr>
 								<?php } ?>

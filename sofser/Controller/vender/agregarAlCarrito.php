@@ -5,33 +5,35 @@ if (!isset($_POST["codigo"]) || !isset($_POST["proveedor"]) || !isset($_POST["ca
 require '../../Model/base_de_datos.php';
 $codigo = $_POST["codigo"];
 $cantidad = $_POST["cantidad"];
-$prov = $_POST["proveedor"];
+$proveedor = $_POST["proveedor"];
 $sentencia = $base_de_datos->prepare("SELECT * FROM producto  WHERE codigoBarras = ?  LIMIT 1;");
 $sentencia->execute([$codigo]);
 $producto = $sentencia->fetch(PDO::FETCH_OBJ);
 
-// print_r($prov);die;
-if ($prov) {
-    $sentencia = $base_de_datos->prepare("SELECT * FROM proveedores WHERE idProveedor = ?  LIMIT 1;");
-    $sentencia->execute([$prov]);
-    $proveedor = $sentencia->fetch(PDO::FETCH_OBJ);
-}
-// print_r($idv);die;
-# Si no existe, salimos y lo indicamos
+$sentencia = $base_de_datos->prepare("SELECT * FROM proveedores WHERE proveedores.idProveedor = ?  LIMIT 1;");
+$sentencia->execute([$proveedor]);
+$prov = $sentencia->fetch(PDO::FETCH_OBJ);
+
+
 if (!$producto) {
     header("Location: ../../View/vender/create.php?status=4");
     exit;
 }
 # Si no hay existencia...
-if ($producto->existencia < $cantidad) {
+if ($producto->existencia < 1) {
     header("Location: ../../View/vender/create.php?status=5");
     exit;
 }
+if (!$prov) {
+    header("Location: ../../View/vender/create.php?status=6");
+    exit;
+}
+
 session_start();
 # Buscar producto dentro del cartito
 $indice = false;
 for ($i = 0; $i < count($_SESSION["carrito"]); $i++) {
-    if ($_SESSION["carrito"][$i]->codigoBarras === $codigo) {
+    if ($_SESSION["carrito"][$i]->codigo === $codigo) {
         $indice = $i;
         break;
     }
@@ -39,8 +41,10 @@ for ($i = 0; $i < count($_SESSION["carrito"]); $i++) {
 # Si no existe, lo agregamos como nuevo
 if ($indice === false) {
     $producto->cantidad = $cantidad;
-    $total = $producto->precio * $cantidad;
-    $producto->total = $total;
+    $total = $producto->precio;
+    $producto->valor_uno = $producto->precio;
+    $producto->proveedor=$proveedor;
+    $producto->total = $cantidad*$producto->precio;
 
     array_push($_SESSION["carrito"], $producto);
 } else {
@@ -52,7 +56,7 @@ if ($indice === false) {
         header("Location: ../../View/vender/create.php?status=5");
         exit;
     }
-    $_SESSION["carrito"][$indice]->cantidad++;
+    $_SESSION["carrito"][$indice]->cantidad+$cantidad;
     $_SESSION["carrito"][$indice]->total = $_SESSION["carrito"][$indice]->total + $_SESSION["carrito"][$indice]->valor_uno;
 }
-header("Location: ../../View/vender/create.php");
+header("Location: ../../View/vender/create.php?status=7");

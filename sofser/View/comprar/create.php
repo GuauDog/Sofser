@@ -27,7 +27,7 @@ include_once '../../Controller/funcs.php';
             </div>
             <div class="col-8">
                 <div class="container-fluid">
-                    <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">COMPRA DE PRODUCTOS</h4>
+                    <h4 style="background-color: #006666; color:#ffffff; padding:13px; text-align:center;">COMPRA DE PRODUCTOS</h4>
                     <br>
                     <?php
                     if (!isset($_SESSION["carrito"])) $_SESSION["carrito"] = [];
@@ -111,7 +111,7 @@ include_once '../../Controller/funcs.php';
                     <h4>TOTAL: <?php echo $granTotal; ?></h4>
                     <form action="Controladores/terminarVenta.php" method="POST">
                         <input name="total" type="hidden" value="<?php echo $granTotal; ?>">
-                        <button type="submit" class="btn btn text-white" style="Background-color:#21822A">Terminar venta</button>
+                        <button type="submit" class="btn btn text-white" style="background-color:#21822A;color:#fff;">Terminar venta</button>
                         <a href="./cancelarVenta.php" class="btn btn-danger">Cancelar venta</a>
                     </form>
                 </div>
