@@ -28,11 +28,11 @@ if (!isset($_SESSION["id_usuario"])) {
                         Registro
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Compras</a></li>
+                        <li><a class="dropdown-item" href="vender/registro.php">Compras</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Ventas</a></li>
+                        <li><a class="dropdown-item" href="vender/registro.php">Ventas</a></li>
 
                     </ul>
                 </li>
@@ -61,10 +61,10 @@ if (!isset($_SESSION["id_usuario"])) {
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="comprar/index.php">Comprar</a>
+                    <a class="nav-link active" aria-current="page" href="comprar/create.php">Comprar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="vender/index.php">Vender</a>
+                    <a class="nav-link active" aria-current="page" href="vender/create.php">Vender</a>
                 </li>
             </ul>
             
