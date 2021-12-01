@@ -67,6 +67,9 @@ if (!isset($_SESSION["id_usuario"])) {
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="../vender/create.php">Vender</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="../../controller/cerrarSesion.php">Cerrar Sesion</a>
+                </li>
             </ul>
             
         </div>

@@ -44,9 +44,6 @@ if (!empty($_POST)) {
                         <!-- Mensaje de Alerta -->
                         <?php echo resultBlock($errors); ?>
                         <!-- Fin alerta -->
-                        <!-- Mensaje de Alerta -->
-                        <?php echo resultBlock($errors); ?>
-                        <!-- Fin alerta -->
                     </div>
                     <div class="card-body" >
                         <form id="loginform" class="form-login" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
@@ -54,7 +51,6 @@ if (!empty($_POST)) {
                                 <input type="text" name="usuario" class="form-control" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" required>
                             </div>
                             <div class="mb-3 text-left">
-                                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                                 <input type="password" name="password" class="form-control" placeholder="Contraseña..." aria-label="password" aria-describedby="basic-addon1">
                             </div>
                             <button type="submit" class="btn" style="background-color: #E34D41;color: white;width: 100%;">Ingresar</button>

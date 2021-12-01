@@ -36,8 +36,21 @@ if (!isset($_SESSION["id_usuario"])) {
                 <div class="container-fluid" style="height: 80%;">
                     <div class="col-xs-12">
                         <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">CREAR PRODUCTO</h4>
-                        
-                        <form method="post" action="../../Controller/producto/create.php">
+                        <?php
+                        if (isset($_GET["status"])) {
+                        ?>
+
+                            <?php
+                            if ($_GET["status"] === "2") {
+                            ?>
+                                <div class="alert alert-danger">
+                                    <strong>Producto ya existe</strong>
+                                </div>
+                        <?php
+                            }
+                        } ?>
+
+                        <form method="post" action="../../Controller/producto/create.php" autocomplete="off">
 
                             <label for="codigo">Código de barras:</label>
                             <input class="form-control" name="codigo" required type="text" id="codigo">
@@ -53,14 +66,14 @@ if (!isset($_SESSION["id_usuario"])) {
                             <select class="form-select" name="ubicacion" aria-label="Default select example">
                                 <option selected value="Bodega">Bodega</option>
                                 <option value="Vitrina">Vitrina</option>
-                                
+
                             </select>
 
                             <label for="precio">Perecedero</label>
                             <select class="form-select" name="perecedero" aria-label="Default select example">
                                 <option selected value="Si">Si</option>
                                 <option value="NO">NO</option>
-                                
+
                             </select>
 
                             <label for="fechaVencimiento">Fecha de Vencimiento:</label>

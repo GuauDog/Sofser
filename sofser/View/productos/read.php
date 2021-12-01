@@ -52,18 +52,33 @@ $rs_result = mysqli_query($conn, $query);
 
 
 
-                            <div class="col"> 
+                            <div class="col">
                                 <a href="create.php"><button class="btn btn-outline " style="color:#fff; background-color:#21822A;width: 100%;">Crear</button></a>
 
                             </div>
 
-                            <div class="col"> 
-                                <a href="semaforo.php" ><button style="width: 100%;" class="btn btn-light">Activar Colores</button></a>
+                            <div class="col">
+                                <a href="semaforo.php"><button style="width: 100%;" class="btn btn-light">Activar Colores</button></a>
                             </div>
 
 
 
+
+
                         </div>
+                        <?php
+                        if (isset($_GET["status"])) {
+                        ?>
+
+                            <?php
+                            if ($_GET["status"] === "1") {
+                            ?>
+                                <div class="alert alert-info">
+                                    <strong>Proveedor creado</strong>
+                                </div>
+                        <?php
+                            }
+                        } ?>
 
 
 

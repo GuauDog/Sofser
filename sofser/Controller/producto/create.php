@@ -17,6 +17,7 @@ if (
 #Si todo va bien, se ejecuta esta parte del código...
 
 include_once "../../Model/base_de_datos.php";
+include_once "../../Model/Conexion.php";
 
 $nombre = $_POST["nombre"];
 $codigo = $_POST["codigo"];
@@ -29,14 +30,25 @@ $stockBas = $_POST["stockBas"];
 $stockMax = $_POST['stockMax'];
 $existencia = $_POST['existencia'];
 
+$stmt = $mysqli->prepare("SELECT codigoBarras FROM  producto WHERE codigoBarras=? LIMIT 1");
+$stmt->bind_param("s", $codigo);
+$stmt->execute();
+$stmt->store_result();
+$num = $stmt->num_rows;
+$stmt->close();
+
+if ($num === 0) {
+	$sentencia = $base_de_datos->prepare("INSERT INTO producto(nombre, codigoBarras, precio, perecedero,fechaVencimiento,empresa, existencia,stockMinimo,stockBasico,stockMaximo) VALUES (?,?,?,?,?,?,?,?,?,?);");
+	$resultado = $sentencia->execute([$nombre, $codigo, $precio, $perecedero, $fechaVencimiento, $empresa,  $existencia, $stockMin, $stockBas, $stockMax]);
+
+	if ($resultado === TRUE) {
+		header("Location: ../../View/productos/read.php");
+		exit;
+	} else echo "Algo salió mal. Por favor verifica que la tabla Exista, así como el ID del producto";
+}else {
+
+	header("Location: ../../View/productos/create.php?status=2");
+}
+
+
 // print_r($existencia);die;
-$sentencia = $base_de_datos->prepare("INSERT INTO producto(nombre, codigoBarras, precio, perecedero,fechaVencimiento,empresa, existencia,stockMinimo,stockBasico,stockMaximo) VALUES (?,?,?,?,?,?,?,?,?,?);");
-$resultado = $sentencia->execute([ $nombre,$codigo, $precio, $perecedero,$fechaVencimiento, $empresa,  $existencia,$stockMin,$stockBas,$stockMax]);
-
-if ($resultado === TRUE) {
-	header("Location: ../../View/productos/read.php");
-	exit;
-} else echo "Algo salió mal. Por favor verifica que la tabla Exista, así como el ID del producto";
-
-
-

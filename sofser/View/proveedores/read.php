@@ -12,7 +12,7 @@ include_once '../../Controller/funcs.php';
 ?>
 
 <?php
-$per_page_record = 4;
+$per_page_record = 10;
 if (isset($_GET["page"])) {
     $page  = $_GET["page"];
 } else {
@@ -50,6 +50,20 @@ $rs_result = mysqli_query($conn, $query);
                             <div class="col-2">
                                 <a href="create.php"><button class="btn btn-outline " style="color:#fff; background-color:#21822A;width: 150px;">Crear</button></a>
                             </div>
+
+                            <?php
+                            if (isset($_GET["status"])) {
+                            ?>
+
+                                <?php
+                                if ($_GET["status"] === "1") {
+                                ?>
+                                    <div class="alert alert-info">
+                                        <strong>Proveedor creado</strong>
+                                    </div>
+                            <?php
+                                }
+                            } ?>
 
 
                         </div>
@@ -151,7 +165,7 @@ $rs_result = mysqli_query($conn, $query);
                                 } ?>
                             </div>
                         </nav>
-                        
+
                     </div>
                 </div>
             </div>

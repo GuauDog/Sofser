@@ -35,8 +35,21 @@ if (!isset($_SESSION["id_usuario"])) {
                 <div class="container-fluid" style="height: 80%;">
                     <div class="col-xs-12">
                         <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">CREAR PROVEEDOR</h4>
+<br>
+                    <?php
+                    if (isset($_GET["status"])) {
+                    ?>
+                            
+                        <?php
+                        if ($_GET["status"] === "2") {
+                        ?>
+                            <div class="alert alert-danger">
+                                <strong>Proveedor ya existe</strong>
+                            </div>
+                        <?php
+                        } }?>
 
-                        <form method="post" action="../../Controller/proveedores/create.php">
+                        <form method="post" action="../../Controller/proveedores/create.php" autocomplete="off">
 
                             <label for="codigo">Identificacion:</label>
                             <input class="form-control" name="documento" required type="text" id="documento">

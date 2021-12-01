@@ -30,20 +30,20 @@ include_once '../../Controller/funcs.php';
 
             <div class="col-8">
                 <div class="container-fluid">
-                    <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">BUSQUEDA DE PRODUCTOS</h4>
+                    <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">COMPRA DE PRODUCTOS</h4>
                     <br>
                     <?php
                     if (isset($_GET["status"])) {
                         if ($_GET["status"] === "1") {
                     ?>
                             <div class="alert alert-success">
-                                <strong>¡Correcto!</strong> Venta realizada correctamente
+                                <strong>¡Correcto!</strong> Compra realizada correctamente
                             </div>
                         <?php
                         } else if ($_GET["status"] === "2") {
                         ?>
                             <div class="alert alert-info">
-                                <strong>Venta cancelada</strong>
+                                <strong>Compra cancelada</strong>
                             </div>
                         <?php
                         } else if ($_GET["status"] === "3") {
@@ -79,7 +79,7 @@ include_once '../../Controller/funcs.php';
                         } else {
                         ?>
                             <div class="alert alert-danger">
-                                <strong>Error:</strong> Algo salió mal mientras se realizaba la venta
+                                <strong>Error:</strong> Algo salió mal mientras se realizaba la compra
                             </div>
                     <?php
                         }
@@ -87,7 +87,7 @@ include_once '../../Controller/funcs.php';
                     ?>
 
 
-                    <form method="post" action="../../Controller/vender/agregarAlCarrito.php">
+                    <form method="post" action="../../Controller/comprar/agregarAlCarrito.php" autocomplete="off">
 
                         <label for="codigo">Código de barras:</label>
                         <input autocomplete="off" autofocus class="form-control" name="codigo" required type="text" id="codigo">
@@ -109,7 +109,7 @@ include_once '../../Controller/funcs.php';
                             <tr>
                                 <th>Código</th>
                                 <th>Descripción</th>
-                                <th>Precio de venta</th>
+                                <th>Precio de Compra</th>
                                 <th>Cantidad</th>
                                 <th>Total</th>
                                 <th>Quitar</th>
@@ -118,7 +118,10 @@ include_once '../../Controller/funcs.php';
                         <tbody>
                             <?php
                             $granTotal = 0;
-                            foreach ($_SESSION["carrito"] as $indice => $producto) {
+                            if (!isset($_SESSION["compras"])) {
+                                $_SESSION["compras"]=[];
+                            }
+                            foreach ($_SESSION["compras"] as $indice => $producto) {
                                 $granTotal += $producto->total;
                             ?>
                                 <tr>
@@ -127,7 +130,7 @@ include_once '../../Controller/funcs.php';
                                     <td><?php echo $producto->precio ?></td>
                                     <td><?php echo $producto->cantidad ?></td>
                                     <td><?php echo $producto->total ?></td>
-                                    <td><a class="btn btn-danger" href="<?php echo "../../Controller/vender/quitarDelCarrito.php?indice=" . $indice ?>"><i class="fa fa-trash"></i></a></td>
+                                    <td><a class="btn btn-danger" href="<?php echo "../../Controller/comprar/quitarDelCarrito.php?indice=" . $indice ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -140,10 +143,10 @@ include_once '../../Controller/funcs.php';
                                 } else {
                                     echo $granTotal;
                                 }  ?></h4>
-                    <form action="../../Controller/vender/terminarVenta.php" method="POST">
+                    <form action="../../Controller/comprar/terminarCompra.php" method="POST">
                         <input name="total" type="hidden" value="<?php echo $granTotal; ?>">
-                        <button type="submit" class="btn btn text-white" style="background-color:#21822A;color:#fff;">Terminar venta</button>
-                        <a href="../../Controller/vender/cancelarVenta.php" class="btn btn-danger">Cancelar venta</a>
+                        <button type="submit" class="btn btn text-white" style="background-color:#21822A;color:#fff;">Terminar Compra</button>
+                        <a href="../../Controller/comprar/cancelarCompra.php" class="btn btn-danger">Cancelar Compra</a>
                     </form>
                 </div>
             </div>

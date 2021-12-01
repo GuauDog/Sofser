@@ -30,7 +30,7 @@ include_once '../../Controller/funcs.php';
 
             <div class="col-8">
                 <div class="container-fluid">
-                    <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">BUSQUEDA DE PRODUCTOS</h4>
+                    <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">VENTA DE PRODUCTOS</h4>
                     <br>
                     <?php
                     if (isset($_GET["status"])) {
@@ -87,7 +87,7 @@ include_once '../../Controller/funcs.php';
                     ?>
 
 
-                    <form method="post" action="../../Controller/vender/agregarAlCarrito.php">
+                    <form method="post" action="../../Controller/vender/agregarAlCarrito.php" autocomplete="off">
 
                         <label for="codigo">Código de barras:</label>
                         <input autocomplete="off" autofocus class="form-control" name="codigo" required type="text" id="codigo">
@@ -118,6 +118,9 @@ include_once '../../Controller/funcs.php';
                         <tbody>
                             <?php
                             $granTotal = 0;
+                            if (!isset($_SESSION["carrito"])) {
+                                $_SESSION["carrito"]=[];
+                            }
                             foreach ($_SESSION["carrito"] as $indice => $producto) {
                                 $granTotal += $producto->total;
                             ?>

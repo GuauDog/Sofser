@@ -30,6 +30,8 @@ if (!$prov) {
 }
 
 session_start();
+$_SESSION["carrito"]=[];
+
 # Buscar producto dentro del cartito
 $indice = false;
 for ($i = 0; $i < count($_SESSION["carrito"]); $i++) {
