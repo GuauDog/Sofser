@@ -12,7 +12,7 @@ include_once '../../Controller/funcs.php';
 ?>
 
 <?php
-$per_page_record = 4;
+$per_page_record = 10;
 if (isset($_GET["page"])) {
     $page  = $_GET["page"];
 } else {
@@ -42,7 +42,7 @@ $rs_result = mysqli_query($conn, $query);
 
 
 
-                            <div class="col-10">
+                            <div class="col-8">
                                 <form class="d-flex" name="form1" method="post">
                                     <input class="form-control me-2" name="PalabraClave" type="search" placeholder="Search..." aria-label="Search">
                                     <input name="buscar" type="hidden" class="form-control " id="inlineFormInput" value="v">
@@ -52,26 +52,31 @@ $rs_result = mysqli_query($conn, $query);
 
 
 
-                            <div class="col-2">
-                                <a href="create.php"><button class="btn btn-outline " style="color:#fff; background-color:#21822A;width: 150px;">Crear</button></a>
+                            <div class="col"> 
+                                <a href="create.php"><button class="btn btn-outline " style="color:#fff; background-color:#21822A;width: 100%;">Crear</button></a>
 
                             </div>
+
+                            <div class="col"> 
+                                <a href="semaforo.php" ><button style="width: 100%;" class="btn btn-light">Activar Colores</button></a>
+                            </div>
+
 
 
                         </div>
 
-                       
+
 
                         <!-- BUSQUEDA -->
                         <div class="data-table " style="overflow: auto; width: 100%;">
-                            <table class="table">
+                            <table class="table text-center">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">Código de Barras</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Precio</th>
                                         <th scope="col">Empresa</th>
-                                        <th scope="col">Stock Minimo</th>
+                                        <th scope="col">Stock</th>
                                         <th scope="col">Editar</th>
                                         <th scope="col">Eliminar</th>
                                     </tr>
@@ -99,7 +104,8 @@ $rs_result = mysqli_query($conn, $query);
                                                     <td><?php echo $row['nombre']; ?></td>
                                                     <td><?php echo $row['precio']; ?></td>
                                                     <td><?php echo $row['empresa']; ?></td>
-                                                    <td><?php echo $row['stockMinimo']; ?></td>
+                                                    <td><?php echo $row['existencia']; ?></td>
+
                                                     <td><a class="btn btn" style="Background-color:#21822A;color:#ffffff;" href="update.php?id=<?php echo $row['idProducto']; ?>"><i class="fa fa-edit"></i></a></td>
                                                     <td><a class="btn btn-danger" href="../../Controller/producto/delete.php?id=<?php echo $row['idProducto']; ?>"><i class="fa fa-trash"></i></a></td>
                                                 </tr>
@@ -116,7 +122,11 @@ $rs_result = mysqli_query($conn, $query);
                                                     <td><?php echo $row['nombre']; ?></td>
                                                     <td><?php echo $row['precio']; ?></td>
                                                     <td><?php echo $row['empresa']; ?></td>
-                                                    <td><?php echo $row['stockMinimo']; ?></td>
+                                                    <td><?php echo $row['existencia']; ?></td>
+
+
+
+
                                                     <td><a class="btn btn" style="Background-color:#21822A;color:#ffffff;" href="update.php?id=<?php echo $row['idProducto']; ?>"><i class="fa fa-edit"></i></a></td>
                                                     <td><a class="btn btn-danger" href="../../Controller/producto/delete.php?id=<?php echo $row['idProducto']; ?>"><i class="fa fa-trash"></i></a></td>
                                                 </tr>
@@ -143,24 +153,24 @@ $rs_result = mysqli_query($conn, $query);
                                 $pagLink = "";
 
                                 if ($page >= 2) {
-                                    echo "<li class='page-item'><a class='page-link' style='color:white; background-color:#F3C915;' href='read.php?page=" . ($page - 1) . "'> Anterior </a></li>";
+                                    echo "<li class='page-item'><a class='page-link' style='color:white; background-color:#7a7a7a;' href='read.php?page=" . ($page - 1) . "'> Anterior </a></li>";
                                 }
 
                                 for ($i = 1; $i <= $total_pages; $i++) {
                                     if ($i == $page) {
-                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#21822A;' class = 'page-link active' href='read.php?page=" . $i . "'>" . $i . " </a></li>";
+                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#7a7a7a;' class = 'page-link active' href='read.php?page=" . $i . "'>" . $i . " </a></li>";
                                     } else {
-                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#21822A;' class='page-link'href='read.php?page=" . $i . "'>   
+                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#7a7a7a;' class='page-link'href='read.php?page=" . $i . "'>   
                                                 " . $i . " </a></li>";
                                     }
                                 };
                                 echo $pagLink;
                                 if ($page < $total_pages) {
-                                    echo "<li class='page-item'><a  style='color:white; background-color:#F3C915;' class='page-link' href='read.php?page=" . ($page + 1) . "'>  Siguiente </a></li>";
+                                    echo "<li class='page-item'><a  style='color:white; background-color:#7a7a7a;' class='page-link' href='read.php?page=" . ($page + 1) . "'>  Siguiente </a></li>";
                                 } ?>
                             </div>
                         </nav>
-                        
+
                     </div>
                 </div>
             </div>

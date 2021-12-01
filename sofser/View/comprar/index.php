@@ -2,6 +2,7 @@
 <!-- <link rel="icon" type="image/png" href="Recursos/Imagenes/LOGO PASION DEPORTIVA COMPLETO2.png"/> -->
 
 <?php
+// <!-- Headers -->
 include_once '../../Resource/Header/Header_Index2.php';
 include_once '../../Resource/Header/Menu_Nav2.php';
 require '../../Model/Conexion.php';
@@ -10,7 +11,6 @@ require '../../Model/Conexion2.php';
 include_once '../../Controller/userInfo.php';
 include_once '../../Controller/funcs.php';
 ?>
-
 
 
 
@@ -23,15 +23,17 @@ include_once '../../Controller/funcs.php';
             </div>
         </div>
         <div class="row">
-
             <div class="col-2">
-
             </div>
-
             <div class="col-8">
                 <div class="container-fluid">
                     <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">BUSQUEDA DE PRODUCTOS</h4>
                     <br>
+                    <?php
+                    if (!isset($_SESSION["carrito"])) $_SESSION["carrito"] = [];
+                    $granTotal = 0;
+                    ?>
+
                     <?php
                     if (isset($_GET["status"])) {
                         if ($_GET["status"] === "1") {
@@ -61,19 +63,7 @@ include_once '../../Controller/funcs.php';
                         } else if ($_GET["status"] === "5") {
                         ?>
                             <div class="alert alert-danger">
-                                <strong>Error: </strong>Cantidad mas alta que las existencias del producto
-                            </div>
-                        <?php
-                        } else if ($_GET["status"] === "6") {
-                        ?>
-                            <div class="alert alert-danger">
-                                <strong>Error: </strong>Proveedor no existe
-                            </div>
-                        <?php
-                        } else if ($_GET["status"] === "7") {
-                        ?>
-                            <div class="alert alert-info">
-                                <strong>Aviso:  </strong>Producto agregado al carrito
+                                <strong>Error: </strong>El producto está agotado
                             </div>
                         <?php
                         } else {
@@ -85,26 +75,12 @@ include_once '../../Controller/funcs.php';
                         }
                     }
                     ?>
-
-
-                    <form method="post" action="../../Controller/vender/agregarAlCarrito.php">
-
-                        <label for="codigo">Código de barras:</label>
-                        <input autocomplete="off" autofocus class="form-control" name="codigo" required type="text" id="codigo">
-
-                        <label for="proveedor">Código Proveedor:</label>
-                        <input autocomplete="off" type="text" name="proveedor" id="proveedor" class="form-control" required>
-
-                        <label for="cantidad">Cantidad:</label>
-                        <input autocomplete="off" type="text" name="cantidad" id="cantidad" class="form-control" required>
-
-                        <br>
-                        <button type="submit" style="background-color:#F3C915;color:#fff" class="btn ">Agregar</button>
+                    <form method="post" action="Controladores/agregarAlCarrito.php">
+                        <!-- <label for="codigo">Código de barras:</label> -->
+                        <input autocomplete="off" autofocus class="form-control" name="codigo" required type="text" id="codigo" placeholder="Escribe el código de Barras...">
                     </form>
 
-
-
-                    <table class="table text-center">
+                    <table class="table">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Código</th>
@@ -116,41 +92,33 @@ include_once '../../Controller/funcs.php';
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $granTotal = 0;
-                            foreach ($_SESSION["carrito"] as $indice => $producto) {
+                            <?php foreach ($_SESSION["carrito"] as $indice => $producto) {
                                 $granTotal += $producto->total;
+
                             ?>
                                 <tr>
-                                    <td><?php echo $producto->codigoBarras ?></td>
-                                    <td><?php echo $producto->nombre ?></td>
-                                    <td><?php echo $producto->precio ?></td>
+                                    <td><?php echo $producto->codigo ?></td>
+                                    <td><?php echo $producto->descripcion ?></td>
+                                    <td><?php echo $producto->precioVenta ?></td>
                                     <td><?php echo $producto->cantidad ?></td>
                                     <td><?php echo $producto->total ?></td>
-                                    <td><a class="btn btn-danger" href="<?php echo "../../Controller/vender/quitarDelCarrito.php?indice=" . $indice ?>"><i class="fa fa-trash"></i></a></td>
+                                    <td><a class="btn btn-danger" href="<?php echo "quitarDelCarrito.php?indice=" . $indice ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
                     </table>
 
-                    <h4>TOTAL: <?php
-                                if (!isset($granTotal)) {
-                                    $granTotal = 0;
-                                    echo $granTotal;
-                                } else {
-                                    echo $granTotal;
-                                }  ?></h4>
-                    <form action="../../Controller/vender/terminarVenta.php" method="POST">
+                    <h4>TOTAL: <?php echo $granTotal; ?></h4>
+                    <form action="Controladores/terminarVenta.php" method="POST">
                         <input name="total" type="hidden" value="<?php echo $granTotal; ?>">
-                        <button type="submit" class="btn btn text-white" style="background-color:#21822A;color:#fff;">Terminar venta</button>
-                        <a href="../../Controller/vender/cancelarVenta.php" class="btn btn-danger">Cancelar venta</a>
+                        <button type="submit" class="btn btn text-white" style="Background-color:#21822A">Terminar venta</button>
+                        <a href="./cancelarVenta.php" class="btn btn-danger">Cancelar venta</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     </div>
-
 
 </body>
 

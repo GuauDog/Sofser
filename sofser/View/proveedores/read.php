@@ -134,20 +134,20 @@ $rs_result = mysqli_query($conn, $query);
                                 $pagLink = "";
 
                                 if ($page >= 2) {
-                                    echo "<li class='page-item'><a class='page-link' style='color:white; background-color:#F3C915;' href='read.php?page=" . ($page - 1) . "'> Anterior </a></li>";
+                                    echo "<li class='page-item'><a class='page-link' style='color:white; background-color:#7a7a7a;' href='read.php?page=" . ($page - 1) . "'> Anterior </a></li>";
                                 }
 
                                 for ($i = 1; $i <= $total_pages; $i++) {
                                     if ($i == $page) {
-                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#21822A;' class = 'page-link active' href='read.php?page=" . $i . "'>" . $i . " </a></li>";
+                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#7a7a7a;' class = 'page-link active' href='read.php?page=" . $i . "'>" . $i . " </a></li>";
                                     } else {
-                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#21822A;' class='page-link'href='read.php?page=" . $i . "'>   
+                                        $pagLink .= "<li class='page-item'><a style='color:white; background-color:#7a7a7a;' class='page-link'href='read.php?page=" . $i . "'>   
                 " . $i . " </a></li>";
                                     }
                                 };
                                 echo $pagLink;
                                 if ($page < $total_pages) {
-                                    echo "<li class='page-item'><a  style='color:white; background-color:#F3C915;' class='page-link' href='read.php?page=" . ($page + 1) . "'>  Siguiente </a></li>";
+                                    echo "<li class='page-item'><a  style='color:white; background-color:#7a7a7a;' class='page-link' href='read.php?page=" . ($page + 1) . "'>  Siguiente </a></li>";
                                 } ?>
                             </div>
                         </nav>

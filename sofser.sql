@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `compra`;
 CREATE TABLE `compra` (
   `idVenta` bigint(11) NOT NULL AUTO_INCREMENT,
   `fechaCompra` datetime NOT NULL,
-  `totalCompra` float(6,2) NOT NULL,
+  `totalCompra` bigint(11) NOT NULL,
   `proveedor_idProveedor` bigint(11) NOT NULL,
   PRIMARY KEY (`idVenta`),
   KEY `proveedor_idProveedor` (`proveedor_idProveedor`)
@@ -54,7 +54,7 @@ CREATE TABLE `producto` (
 
 /*Data for the table `producto` */
 
-insert  into `producto`(`idProducto`,`nombre`,`codigoBarras`,`precio`,`ubicacion`,`perecedero`,`empresa`,`fechaEntrada`,`fechaVencimiento`,`existencia`,`stockMinimo`,`stockBasico`,`stockMaximo`) values (11,'gfagdsa','48',2000,'Vitrina','Si','12',NULL,'2021-11-01',27,689,85,23);
+insert  into `producto`(`idProducto`,`nombre`,`codigoBarras`,`precio`,`ubicacion`,`perecedero`,`empresa`,`fechaEntrada`,`fechaVencimiento`,`existencia`,`stockMinimo`,`stockBasico`,`stockMaximo`) values (11,'gfagdsa','48',2000,'Bodega','Si','12',NULL,'2021-11-01',9,10,15,20);
 
 /*Table structure for table `producto_compra` */
 
@@ -95,11 +95,9 @@ CREATE TABLE `producto_venta` (
   CONSTRAINT `producto_venta_ibfk_1` FOREIGN KEY (`producto_idProducto`) REFERENCES `producto` (`idProducto`),
   CONSTRAINT `producto_venta_ibfk_2` FOREIGN KEY (`venta_idventa`) REFERENCES `venta` (`idVenta`),
   CONSTRAINT `producto_venta_ibfk_3` FOREIGN KEY (`proveedor_idProveedor`) REFERENCES `proveedores` (`idProveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `producto_venta` */
-
-insert  into `producto_venta`(`idProducto_venta`,`producto_idProducto`,`cantidad`,`venta_idVenta`,`proveedor_idProveedor`) values (2,11,'2',11,11),(3,11,'2',12,11),(4,11,'2',13,2),(5,11,'5',14,2),(6,11,'5',14,2);
 
 /*Table structure for table `proveedores` */
 
@@ -147,15 +145,13 @@ DROP TABLE IF EXISTS `venta`;
 CREATE TABLE `venta` (
   `idVenta` bigint(11) NOT NULL AUTO_INCREMENT,
   `fechaVenta` datetime NOT NULL,
-  `totalVenta` float(6,2) NOT NULL,
+  `totalVenta` bigint(11) NOT NULL,
   `proveedor_idProveedor` bigint(11) NOT NULL,
   PRIMARY KEY (`idVenta`),
   KEY `proveedor_idProveedor` (`proveedor_idProveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 /*Data for the table `venta` */
-
-insert  into `venta`(`idVenta`,`fechaVenta`,`totalVenta`,`proveedor_idProveedor`) values (11,'2021-11-30 22:05:00',4000.00,0),(12,'2021-11-30 22:05:37',4000.00,0),(13,'2021-11-30 22:08:30',4000.00,0),(14,'2021-11-30 22:09:58',9999.99,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

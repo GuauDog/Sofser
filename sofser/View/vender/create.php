@@ -61,7 +61,7 @@ include_once '../../Controller/funcs.php';
                         } else if ($_GET["status"] === "5") {
                         ?>
                             <div class="alert alert-danger">
-                                <strong>Error: </strong>El producto está agotado
+                                <strong>Error: </strong>Cantidad mas alta que las existencias del producto
                             </div>
                         <?php
                         } else if ($_GET["status"] === "6") {
@@ -104,7 +104,7 @@ include_once '../../Controller/funcs.php';
 
 
 
-                    <table class="table">
+                    <table class="table text-center">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Código</th>
