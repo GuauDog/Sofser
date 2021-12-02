@@ -1,9 +1,8 @@
 /*
 SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.5.5-10.4.18-MariaDB : Database - farmaday
+MySQL - 5.5.5-10.4.21-MariaDB : Database - sofser
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -13,90 +12,115 @@ MySQL - 5.5.5-10.4.18-MariaDB : Database - farmaday
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`sofser` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`sofser` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `sofser`;
 
-/*Table structure for table `dcconsentimiento` */
+/*Table structure for table `compra` */
 
-DROP TABLE IF EXISTS `dcconsentimiento`;
+DROP TABLE IF EXISTS `compra`;
 
-CREATE TABLE `dcconsentimiento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  `cargo` varchar(100) NOT NULL,
-  `nomPaciente` varchar(100) NOT NULL,
-  `firmPaciente` varchar(100) NOT NULL,
-  `tpDocument` varchar(50) NOT NULL,
-  `cedula` varchar(20) NOT NULL,
-  `nombreAcargo` varchar(100) NOT NULL,
-  `firmaCargo` varchar(100) NOT NULL,
-  `fechaRegistro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+CREATE TABLE `compra` (
+  `idCompra` bigint(11) NOT NULL AUTO_INCREMENT,
+  `fechaCompra` datetime NOT NULL,
+  `totalCompra` bigint(11) NOT NULL,
+  `proveedor_idProveedor` bigint(11) NOT NULL,
+  PRIMARY KEY (`idCompra`),
+  KEY `proveedor_idProveedor` (`proveedor_idProveedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
-/*Data for the table `dcconsentimiento` */
+/*Data for the table `compra` */
 
-insert  into `dcconsentimiento`(`id`,`nombre`,`cargo`,`nomPaciente`,`firmPaciente`,`tpDocument`,`cedula`,`nombreAcargo`,`firmaCargo`,`fechaRegistro`) values (6,'Juan','Sebastian','Juan Cardenas','sebas','Tipo de Documento','1003652437','Doctor','Doctor2021','2021-10-10 20:01:19');
+insert  into `compra`(`idCompra`,`fechaCompra`,`totalCompra`,`proveedor_idProveedor`) values (1,'2021-12-01 16:41:31',4000,0),(2,'2021-12-01 16:49:19',10000,0),(3,'2021-12-01 16:49:42',4000,0),(4,'2021-12-01 16:50:04',4000,0),(5,'2021-12-01 16:51:19',4000,0),(6,'2021-12-01 16:52:10',4000,0),(8,'2021-12-01 17:50:40',10000,0);
 
-/*Table structure for table `iva` */
+/*Table structure for table `producto` */
 
-DROP TABLE IF EXISTS `iva`;
+DROP TABLE IF EXISTS `producto`;
 
-CREATE TABLE `iva` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(11) NOT NULL,
-  `codigo_Iva` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE `producto` (
+  `idProducto` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(300) NOT NULL,
+  `codigoBarras` varchar(30) NOT NULL,
+  `precio` bigint(10) NOT NULL,
+  `ubicacion` varchar(30) NOT NULL,
+  `perecedero` varchar(20) NOT NULL,
+  `empresa` varchar(300) NOT NULL,
+  `fechaEntrada` date DEFAULT NULL,
+  `fechaVencimiento` date NOT NULL,
+  `existencia` bigint(11) NOT NULL,
+  `stockMinimo` bigint(11) NOT NULL,
+  `stockBasico` bigint(11) NOT NULL,
+  `stockMaximo` bigint(11) NOT NULL,
+  PRIMARY KEY (`idProducto`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-/*Data for the table `iva` */
+/*Data for the table `producto` */
 
-insert  into `iva`(`id`,`nombre`,`codigo_Iva`) values (3,'Medicamento','0.16');
+insert  into `producto`(`idProducto`,`nombre`,`codigoBarras`,`precio`,`ubicacion`,`perecedero`,`empresa`,`fechaEntrada`,`fechaVencimiento`,`existencia`,`stockMinimo`,`stockBasico`,`stockMaximo`) values (11,'gfagdsa','48',2000,'Bodega','Si','12',NULL,'2021-11-01',13,10,15,20),(12,'prueba','132465',2000,'','Si','dsadsa',NULL,'3453-04-25',305,10,15,20);
 
-/*Table structure for table `productos` */
+/*Table structure for table `producto_compra` */
 
-DROP TABLE IF EXISTS `productos`;
+DROP TABLE IF EXISTS `producto_compra`;
 
-CREATE TABLE `productos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(255) NOT NULL,
-  `descripcion` varchar(255) NOT NULL,
-  `precioVenta` float(6,2) NOT NULL,
-  `precioCompra` float(6,2) NOT NULL,
-  `existencia` varchar(20) NOT NULL,
-  `id_iva` bigint(20) DEFAULT NULL,
-  `fechaVencimiento` date DEFAULT NULL,
-  `registroInvima` int(20) DEFAULT NULL,
-  `valor_uno` float(6,2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_iva` (`id_iva`),
-  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_iva`) REFERENCES `iva` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+CREATE TABLE `producto_compra` (
+  `idProducto_compra` bigint(11) NOT NULL AUTO_INCREMENT,
+  `producto_idProducto` bigint(11) NOT NULL,
+  `cantidad` varchar(30) NOT NULL,
+  `compra_idCompra` bigint(11) NOT NULL,
+  `proveedor_idProveedor` bigint(11) NOT NULL,
+  PRIMARY KEY (`idProducto_compra`),
+  KEY `venta_idventa` (`compra_idCompra`),
+  KEY `producto_idProducto` (`producto_idProducto`),
+  KEY `proveedor_idProveedor` (`proveedor_idProveedor`),
+  CONSTRAINT `producto_compra_ibfk_1` FOREIGN KEY (`compra_idCompra`) REFERENCES `compra` (`idCompra`),
+  CONSTRAINT `producto_compra_ibfk_2` FOREIGN KEY (`producto_idProducto`) REFERENCES `producto` (`idProducto`),
+  CONSTRAINT `producto_compra_ibfk_3` FOREIGN KEY (`proveedor_idProveedor`) REFERENCES `proveedores` (`idProveedor`),
+  CONSTRAINT `producto_compra_ibfk_4` FOREIGN KEY (`proveedor_idProveedor`) REFERENCES `proveedores` (`idProveedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
-/*Data for the table `productos` */
+/*Data for the table `producto_compra` */
 
-insert  into `productos`(`id`,`codigo`,`descripcion`,`precioVenta`,`precioCompra`,`existencia`,`id_iva`,`fechaVencimiento`,`registroInvima`,`valor_uno`) values (13,'1212','Vitamina',1000.00,50.00,'8',3,'2021-10-09',1231312,2.00),(14,'1515','Dolex',1000.00,50.00,'10',3,'2021-10-09',1231312,NULL);
+insert  into `producto_compra`(`idProducto_compra`,`producto_idProducto`,`cantidad`,`compra_idCompra`,`proveedor_idProveedor`) values (2,12,'5',8,8);
 
-/*Table structure for table `productos_vendidos` */
+/*Table structure for table `producto_venta` */
 
-DROP TABLE IF EXISTS `productos_vendidos`;
+DROP TABLE IF EXISTS `producto_venta`;
 
-CREATE TABLE `productos_vendidos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `id_producto` bigint(20) unsigned NOT NULL,
-  `cantidad` varchar(20) NOT NULL,
-  `id_venta` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_producto` (`id_producto`),
-  KEY `id_venta` (`id_venta`),
-  CONSTRAINT `productos_vendidos_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `productos_vendidos_ibfk_2` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+CREATE TABLE `producto_venta` (
+  `idProducto_venta` bigint(11) NOT NULL AUTO_INCREMENT,
+  `producto_idProducto` bigint(11) NOT NULL,
+  `cantidad` varchar(30) NOT NULL,
+  `venta_idVenta` bigint(11) NOT NULL,
+  `proveedor_idProveedor` bigint(11) NOT NULL,
+  PRIMARY KEY (`idProducto_venta`),
+  KEY `producto_idProducto` (`producto_idProducto`),
+  KEY `venta_idventa` (`venta_idVenta`),
+  KEY `proveedor_idProveedor` (`proveedor_idProveedor`),
+  CONSTRAINT `producto_venta_ibfk_1` FOREIGN KEY (`producto_idProducto`) REFERENCES `producto` (`idProducto`),
+  CONSTRAINT `producto_venta_ibfk_2` FOREIGN KEY (`venta_idventa`) REFERENCES `venta` (`idVenta`),
+  CONSTRAINT `producto_venta_ibfk_3` FOREIGN KEY (`proveedor_idProveedor`) REFERENCES `proveedores` (`idProveedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
-/*Data for the table `productos_vendidos` */
+/*Data for the table `producto_venta` */
 
-insert  into `productos_vendidos`(`id`,`id_producto`,`cantidad`,`id_venta`) values (23,13,'1',23),(24,14,'1',23);
+insert  into `producto_venta`(`idProducto_venta`,`producto_idProducto`,`cantidad`,`venta_idVenta`,`proveedor_idProveedor`) values (15,12,'3',24,8),(16,12,'5',25,8),(17,12,'5',26,8),(18,12,'2',27,8),(19,12,'35',28,8),(20,12,'354',29,8);
+
+/*Table structure for table `proveedores` */
+
+DROP TABLE IF EXISTS `proveedores`;
+
+CREATE TABLE `proveedores` (
+  `idProveedor` bigint(11) NOT NULL AUTO_INCREMENT,
+  `documentoProveedor` int(11) NOT NULL,
+  `nombreProveedor` varchar(100) NOT NULL,
+  `empresaProveedor` varchar(100) NOT NULL,
+  `codigoEmpresa` varchar(30) NOT NULL,
+  PRIMARY KEY (`idProveedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+/*Data for the table `proveedores` */
+
+insert  into `proveedores`(`idProveedor`,`documentoProveedor`,`nombreProveedor`,`empresaProveedor`,`codigoEmpresa`) values (8,123464,'aaaaa','dsadsa','4564312');
 
 /*Table structure for table `usuario` */
 
@@ -105,42 +129,37 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(30) NOT NULL,
-  `genero` varchar(11) NOT NULL,
-  `telefono` varchar(15) NOT NULL,
-  `estado` varchar(7) NOT NULL DEFAULT 'Activo',
-  `fechaNacimiento` date DEFAULT NULL,
-  `tpDocumento` varchar(20) NOT NULL,
   `cedula` varchar(12) NOT NULL,
-  `password` varchar(130) NOT NULL,
-  `nombreUsuario` varchar(100) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
   `correo` varchar(80) NOT NULL,
+  `password` varchar(130) NOT NULL,
   `last_session` datetime DEFAULT NULL,
-  `activacion` int(11) NOT NULL DEFAULT 0,
   `token` varchar(40) NOT NULL,
   `token_password` varchar(100) DEFAULT NULL,
   `password_request` int(11) DEFAULT 0,
+  `estado` varchar(7) NOT NULL DEFAULT 'Activo',
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`idUsuario`,`usuario`,`genero`,`telefono`,`estado`,`fechaNacimiento`,`tpDocumento`,`cedula`,`password`,`nombreUsuario`,`apellido`,`correo`,`last_session`,`activacion`,`token`,`token_password`,`password_request`) values (76,'Juan','','','Activo',NULL,'','','$2y$10$5uvOTDazyGACs1wHXfFCyeIGSLMzQKGONofLZEtlPYTDQufhYscge','Juan','','rrejuancho1999@gmail.com','2021-10-10 18:10:43',0,'9e823c93c11fd13292e8dfdeee81726a','',0);
+insert  into `usuario`(`idUsuario`,`usuario`,`cedula`,`correo`,`password`,`last_session`,`token`,`token_password`,`password_request`,`estado`) values (76,'Juan','','rrejuancho1999@gmail.com','$2y$10$5uvOTDazyGACs1wHXfFCyeIGSLMzQKGONofLZEtlPYTDQufhYscge','2021-10-10 18:10:43','9e823c93c11fd13292e8dfdeee81726a','',0,'Activo'),(77,'brandon','1073668158','example@gmail.com','$2y$10$.rqd4.lnyDos3oGDE.K5dutDpVPTcVdOZahaNFex7I0yRU8RacisC','2021-11-25 16:43:32','1','',0,'Activo'),(79,'brandon','1073668158','jdsoa@gmail.com','$2y$10$auKMg2ZAxkw1TXUJdLhf5eSkexMIUT54tW5O5n5uGi.NW0aeWR6b2',NULL,'170',NULL,0,'Activo');
 
-/*Table structure for table `ventas` */
+/*Table structure for table `venta` */
 
-DROP TABLE IF EXISTS `ventas`;
+DROP TABLE IF EXISTS `venta`;
 
-CREATE TABLE `ventas` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `fecha` datetime NOT NULL,
-  `total` float(6,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+CREATE TABLE `venta` (
+  `idVenta` bigint(11) NOT NULL AUTO_INCREMENT,
+  `fechaVenta` datetime NOT NULL,
+  `totalVenta` bigint(11) NOT NULL,
+  `proveedor_idProveedor` bigint(11) NOT NULL,
+  PRIMARY KEY (`idVenta`),
+  KEY `proveedor_idProveedor` (`proveedor_idProveedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
-/*Data for the table `ventas` */
+/*Data for the table `venta` */
 
-insert  into `ventas`(`id`,`fecha`,`total`) values (3,'2021-10-09 20:48:38',12.00),(4,'2021-10-09 20:51:17',0.00),(8,'2021-10-09 23:29:45',1160.00),(10,'2021-10-09 23:33:59',1160.00),(11,'2021-10-09 23:34:59',1160.00),(16,'2021-10-10 00:08:29',1160.00),(23,'2021-10-11 02:46:39',2320.00);
+insert  into `venta`(`idVenta`,`fechaVenta`,`totalVenta`,`proveedor_idProveedor`) values (24,'2021-12-01 17:50:15',6000,0),(25,'2021-12-01 17:50:59',10000,0),(26,'2021-12-01 17:51:52',10000,0),(27,'2021-12-01 17:55:54',4000,0),(28,'2021-12-01 17:59:47',70000,0),(29,'2021-12-01 18:00:01',708000,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
