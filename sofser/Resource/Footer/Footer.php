@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="bg text-center text-white">
+<footer class="text-center text-white" style="background: #000;">
     <!-- Grid container -->
     <div class="container">
         <br><br><br>
@@ -26,7 +26,7 @@
                 <br><br>
             </div>
             <div class="col-sm-4">
-                <img src="../Resource/img/logo.png" width="150px">
+                <img src="../Resource/img/LOGO_BLANCO.png" width="150px">
             </div>
             <div class="col-sm"></div>
         </div>

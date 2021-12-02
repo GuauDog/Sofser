@@ -61,7 +61,7 @@ if (!empty($_POST)) {
                 <br>
                 <br>
                 <br><br><br><br><br><br>
-                <div class="card" style="border: 3px solid #D39D63;border-radius: 25px;">
+                <div class="card" style="border: 3px solid #a3a3a3;border-radius: 25px;">
                     <div class="card-header">
                         <div class="card-title">
                             <!-- <img src="Recursos/Imagenes/LOGO FARMA PNG.png" class="img-fluid" style="width: 15%;"> -->
@@ -93,7 +93,7 @@ if (!empty($_POST)) {
                             <div class="input-group mb-3">
                                 <input type="password" name="con_password" class="form-control" placeholder="Confirmar Contraseña" id="myPassword" aria-label="Contraseña" aria-describedby="basic-addon1" required />
                             </div>
-                            <button type="submit" class="btn" style="background-color: #E34D41;color: #ffffff;width: 100%;font-weight: bold;">Registrarse</button>
+                            <button type="submit" class="btn" style="background-color: #2196f3;color: #ffffff;width: 100%;font-weight: bold;">Registrarse</button>
                             <div class="botones_regresos mt-3">
                                 <a href="login.php" class="old">
                                     <center>Tienes una cuenta inicia aquí !!</center>

@@ -35,7 +35,7 @@ if (!empty($_POST)) {
                 <br>
                 <br>
                 <br><br><br><br><br><br><br><br><br><br>
-                <div class="card" style="border: 3px solid #AED3AE; border-radius: 25px;">
+                <div class="card" style="border: 3px solid #a3a3a3; border-radius: 25px;">
                     <div class="card-header" >
                         <div class="card-title">
                             <!-- <img src="Recursos/Imagenes/LOGO FARMA PNG.png" class="img-fluid" style="width: 15%;"> -->
@@ -53,7 +53,7 @@ if (!empty($_POST)) {
                             <div class="mb-3 text-left">
                                 <input type="password" name="password" class="form-control" placeholder="Contraseña..." aria-label="password" aria-describedby="basic-addon1">
                             </div>
-                            <button type="submit" class="btn" style="background-color: #E34D41;color: white;width: 100%;">Ingresar</button>
+                            <button type="submit" class="btn" style="background-color: #2196f3;color: white;width: 100%;">Ingresar</button>
                             <br>
                             <div class="botones_regresos mt-3">
                                 <a href="recupera.php" class="old text-center">

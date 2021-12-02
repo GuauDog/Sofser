@@ -21,8 +21,8 @@ require '../Controller/funcs.php';
                 <br><br><br><br><br><br><br><br><br><br><br><br>
 
                 <div class="card" style="border: 3px solid #D39D63; border-radius: 25px;">
-                    <div class="card-header" >
-                        <div class="card-title">
+                    <div class="card-header">
+                        <div class="card-title" >
                             <h3>CAMBIO DE CONTRASEÑA</h3>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ require '../Controller/funcs.php';
                                 <input type="password"  name="con_password" class="form-control" placeholder="Confirmar Contraseña" aria-label="conpassword" aria-describedby="basic-addon1">
                             </div>
                             
-                            <input type="submit" class="btn" style="background-color: #E34D41;color: #fff;width: 100%;font-weight: bold;" value="Modificar">
+                            <input type="submit" class="btn" style="background-color: #2196f3;color: #fff;width: 100%;font-weight: bold;" value="Modificar">
                             <br>
                             <div class="botones_regresos mt-3">
                                 <a href="login.php" class="old">
@@ -44,7 +44,7 @@ require '../Controller/funcs.php';
                                 </a>
                             </div>
                             <div class="botones_regreso">
-                                <a href="registro.php" class="form-an-account">
+                                <a href="registro.php" class="old">
                                     <center>¿No tienes una cuenta?,¡Registrate!</center>
                                 </a>
                             </div>

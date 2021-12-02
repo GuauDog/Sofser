@@ -18,3 +18,4 @@ if (validaPassword($password,$con_password)) {
     echo "<script>alert('Las contraseñas no coinciden');window.location='../View/cambia_pass.php'</script>";
 
 }
+   

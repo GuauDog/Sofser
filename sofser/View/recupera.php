@@ -50,7 +50,7 @@ if (!empty($_POST)) {
                             <div class="input-group mb-3">
                                 <input type="text" name="email" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" required>
                             </div>
-                            <button type="submit" class="btn" style="background-color: #E34D41;color: #ffffff;width: 100%;font-weight: bold;">Enviar</button>
+                            <button type="submit" class="btn" style="background-color: #2196f3;color: #ffffff;width: 100%;font-weight: bold;">Enviar</button>
                             <br>
                             <div class="botones_regresos mt-3">
                                 <a href="login.php" class="old">
