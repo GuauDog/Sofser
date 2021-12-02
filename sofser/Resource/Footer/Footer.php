@@ -6,18 +6,7 @@
         <!--Grid row-->
         <div class="row">
             <!--Grid column-->
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <a class="text-uppercase" href="#" style="text-decoration: none; color: white;">Registro de compras y ventas</a>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <a class="text-uppercase" href="#" style="text-decoration: none; color: white;">Realizar compras</a>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <a class="text-uppercase" href="#" style="text-decoration: none; color: white;">Bodega</a>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <a class="text-uppercase" href="#" style="text-decoration: none; color: white;">Provedores</a>
-            </div>
+            
             <!--Grid column-->
         </div>
         <!--Grid row-->
