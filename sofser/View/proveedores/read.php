@@ -40,7 +40,7 @@ $rs_result = mysqli_query($conn, $query);
                         <h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">PROVEEDORES</h4>
                         <div class="row">
                             <div class="col-10">
-                                <form class="d-flex" name="form1" method="post">
+                                <form class="d-flex" name="form1" method="post"  autocomplete="off">
                                     <input class="form-control me-2" name="PalabraClave" type="search" placeholder="Search..." aria-label="Search">
                                     <input name="buscar" type="hidden" class="form-control " id="inlineFormInput" value="v">
                                     <button class="btn btn-outline " style="color:#fff; background-color:#F3C915;width: 150px;" type="submit">Buscar</button>

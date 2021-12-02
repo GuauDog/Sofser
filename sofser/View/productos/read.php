@@ -43,7 +43,7 @@ $rs_result = mysqli_query($conn, $query);
 
 
                             <div class="col-8">
-                                <form class="d-flex" name="form1" method="post">
+                                <form class="d-flex" name="form1" method="post" autocomplete="off">
                                     <input class="form-control me-2" name="PalabraClave" type="search" placeholder="Search..." aria-label="Search">
                                     <input name="buscar" type="hidden" class="form-control " id="inlineFormInput" value="v">
                                     <button class="btn btn-outline " style="color:#fff; background-color:#F3C915;width: 150px;" type="submit">Buscar</button>
@@ -117,7 +117,7 @@ $rs_result = mysqli_query($conn, $query);
                                                 <tr>
                                                     <td><?php echo $row['codigoBarras']; ?></td>
                                                     <td><?php echo $row['nombre']; ?></td>
-                                                    <td><?php echo $row['precio']; ?></td>
+                                                    <td>$ <?php echo $row['precio']; ?></td>
                                                     <td><?php echo $row['empresa']; ?></td>
                                                     <td><?php echo $row['existencia']; ?></td>
 
@@ -135,7 +135,7 @@ $rs_result = mysqli_query($conn, $query);
                                                 <tr>
                                                     <td><?php echo $row['codigoBarras']; ?></td>
                                                     <td><?php echo $row['nombre']; ?></td>
-                                                    <td><?php echo $row['precio']; ?></td>
+                                                    <td>$<?php echo $row['precio']; ?></td>
                                                     <td><?php echo $row['empresa']; ?></td>
                                                     <td><?php echo $row['existencia']; ?></td>
 

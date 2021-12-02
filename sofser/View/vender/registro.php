@@ -82,7 +82,7 @@ $venta = $sentencia->fetchAll(PDO::FETCH_OBJ);
 										</tbody>
 									</table>
 								</td>
-								<td><?php echo $venta->totalVenta ?></td>
+								<td>$<?php echo $venta->totalVenta ?></td>
 								<td><a class="btn btn-danger" href="<?php echo "../../Controller/vender/eliminarVenta.php?id=" . $venta->idVenta ?>"><i class="fa fa-trash"></i></a></td>
 							</tr>
 						<?php } ?>

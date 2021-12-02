@@ -83,7 +83,7 @@ $compra = $sentencia->fetchAll(PDO::FETCH_OBJ);
 										</tbody>
 									</table>
 								</td>
-								<td><?php echo $compra->totalCompra ?></td>
+								<td>$<?php echo $compra->totalCompra?></td>
 								<td><a class="btn btn-danger" href="<?php echo "../../Controller/comprar/eliminarCompra.php?id=" . $compra->idCompra ?>"><i class="fa fa-trash"></i></a></td>
 							</tr>
 						<?php } ?>
