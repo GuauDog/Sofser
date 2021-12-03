@@ -37,7 +37,7 @@ if (!empty($_POST)) {
             </div>
             <div class="col-6 text-center">
                 <br><br><br><br><br><br><br><br><br><br><br><br>
-                <div class="card" style="border: 3px solid #AED3AE; border-radius: 25px;">
+                <div class="card" style="border: 3px solid #a3a3a3; border-radius: 25px;">
                     <div class="card-header">
                         <h3>RECUPERAR CONTRASEÑA</h3>
                         <!-- Mensaje de Alerta -->

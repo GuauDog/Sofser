@@ -20,7 +20,7 @@ require '../Controller/funcs.php';
             <div class="col-6 text-center">
                 <br><br><br><br><br><br><br><br><br><br><br><br>
 
-                <div class="card" style="border: 3px solid #D39D63; border-radius: 25px;">
+                <div class="card" style="border: 3px solid #a3a3a3; border-radius: 25px;">
                     <div class="card-header">
                         <div class="card-title" >
                             <h3>CAMBIO DE CONTRASEÑA</h3>
