@@ -13,6 +13,17 @@ include_once '../../Controller/funcs.php';
 
 $sentencia = $base_de_datos->query("SELECT compra.totalCompra, compra.fechaCompra, compra.idCompra, GROUP_CONCAT(	producto.codigoBarras, '..',  producto.nombre,'..', producto_compra.cantidad,'..', producto_compra.proveedor_idProveedor SEPARATOR '__') AS producto FROM compra INNER JOIN producto_compra ON producto_compra.compra_idcompra = compra.idCompra INNER JOIN producto ON producto.idProducto = producto_compra.producto_idProducto GROUP BY compra.idCompra ORDER BY compra.idCompra DESC;");
 $compra = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+$cantidad = count($compra);
+
+$total_suma = 0;
+
+foreach ($compra as $cantidades) {
+
+	$total_suma += $cantidades->totalCompra;
+}
+$cantidad = $total_suma / $cantidad;
+
 ?>
 
 <body style="background-color: #fff">
@@ -35,7 +46,32 @@ $compra = $sentencia->fetchAll(PDO::FETCH_OBJ);
 				<br>
 				<div class="row">
 					<div class="col-11">
+						<form action="filtro.php" method="post">
+							<div class="row g-3 align-items-center">
+								<div class="col-auto">
+									<label for="inputPassword6" class="col-form-label">DESDE</label>
+								</div>
+								<div class="col-auto">
 
+									<input type="date" class="form-control" name="month1" id="month1">
+
+								</div>
+
+
+								<div class="col-auto">
+									<label for="inputPassword6" class="col-form-label">HASTA</label>
+								</div>
+								<div class="col-auto">
+
+									<input type="date" class="form-control" name="month2" id="month2">
+
+								</div>
+
+								<div class="col-auto">
+									<button type="submit" style="background: #F3C915;color:#fff;" class="btn">Submit</button>
+								</div>
+							</div>
+						</form>
 					</div>
 					<div class="col-1">
 						<a class="btn btn-success btn-block" href="create.php" style="background-color:#21822A;color:#fff;margin-bottom: 20px;">NUEVO </a>
@@ -80,13 +116,32 @@ $compra = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
 												</tr>
 											<?php } ?>
+
 										</tbody>
 									</table>
 								</td>
-								<td>$<?php echo $compra->totalCompra?></td>
+								<td>$<?php echo $compra->totalCompra ?></td>
 								<td><a class="btn btn-danger" href="<?php echo "../../Controller/comprar/eliminarCompra.php?id=" . $compra->idCompra ?>"><i class="fa fa-trash"></i></a></td>
 							</tr>
 						<?php } ?>
+
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+
+							<th>Promedio</th>
+							<td></td>
+
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<th>$<?php echo $cantidad; ?></th>
+							<td></td>
+
+						</tr>
 					</tbody>
 				</table>
 

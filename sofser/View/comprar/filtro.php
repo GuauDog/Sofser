@@ -1,3 +1,12 @@
+<?php
+if (!isset($_POST["month1"]) || !isset($_POST["month2"])) {
+	exit;
+}
+$desde = $_POST["month1"];
+$hasta = $_POST["month2"];
+
+?>
+
 <html id="prueba">
 
 <?php
@@ -11,22 +20,22 @@ include_once '../../Controller/funcs.php';
 ?>
 <?php
 
-$sentencia = $base_de_datos->query("SELECT venta.totalVenta, venta.fechaVenta, venta.idVenta, GROUP_CONCAT(	producto.codigoBarras, '..',  producto.nombre,'..', producto_venta.cantidad,'..', producto_venta.proveedor_idProveedor SEPARATOR '__') AS producto FROM venta INNER JOIN producto_venta ON producto_venta.venta_idventa = venta.idVenta INNER JOIN producto ON producto.idProducto = producto_venta.producto_idProducto GROUP BY venta.idVenta ORDER BY venta.idVenta DESC;");
-$venta = $sentencia->fetchAll(PDO::FETCH_OBJ);
+$sentencia = $base_de_datos->query("SELECT compra.totalCompra, compra.fechaCompra, compra.idCompra, GROUP_CONCAT(	producto.codigoBarras, '..',  producto.nombre,'..', producto_compra.cantidad,'..', producto_compra.proveedor_idProveedor SEPARATOR '__') AS producto FROM compra INNER JOIN producto_compra ON producto_compra.compra_idcompra = compra.idCompra INNER JOIN producto ON producto.idProducto = producto_compra.producto_idProducto WHERE compra.fechaCompra BETWEEN '$desde' AND '$hasta' GROUP BY compra.idCompra ORDER BY compra.idCompra DESC;");
+$compra = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
-$cantidad=count($venta);
+$cantidad = count($compra);
 
-$total_suma= 0;
+$total_suma = 0;
 
-foreach ($venta as $cantidades) {
+foreach ($compra as $cantidades) {
 
-	$total_suma += $cantidades->totalVenta;
+	$total_suma += $cantidades->totalCompra;
 }
-$cantidad=$total_suma/$cantidad;
+$cantidad = $total_suma / $cantidad;
 
 ?>
 
-<body style="background-color: #fff;overflow: hidden !important;">
+<body style="background-color: #fff">
 	<?php
 	?>
 	<div class="container-fluid">
@@ -42,7 +51,7 @@ $cantidad=$total_suma/$cantidad;
 			</div>
 
 			<div class="col-8" style="overflow-y:auto; height: 800px;">
-				<h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">REGISTRO DE VENTAS</h4>
+				<h4 style="background-color: #7a7a7a; color:#ffffff; padding:13px; text-align:center;">REGISTRO DE COMPRAS</h4>
 				<br>
 				<div class="row">
 					<div class="col-11">
@@ -77,6 +86,7 @@ $cantidad=$total_suma/$cantidad;
 						<a class="btn btn-success btn-block" href="create.php" style="background-color:#21822A;color:#fff;margin-bottom: 20px;">NUEVO </a>
 					</div>
 				</div>
+
 				<table class="table text-center">
 					<thead class="thead-dark">
 						<tr>
@@ -88,10 +98,10 @@ $cantidad=$total_suma/$cantidad;
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($venta as $venta) { ?>
+						<?php foreach ($compra as $compra) { ?>
 							<tr>
-								<td><?php echo $venta->idVenta ?></td>
-								<td><?php echo $venta->fechaVenta ?></td>
+								<td><?php echo $compra->idCompra ?></td>
+								<td><?php echo $compra->fechaCompra ?></td>
 								<td>
 									<table class="table text-center">
 										<thead class="thead-dark">
@@ -104,7 +114,7 @@ $cantidad=$total_suma/$cantidad;
 											</tr>
 										</thead>
 										<tbody>
-											<?php foreach (explode("__", $venta->producto) as $productoConcatenados) {
+											<?php foreach (explode("__", $compra->producto) as $productoConcatenados) {
 												$producto = explode("..", $productoConcatenados)
 											?>
 												<tr>
@@ -115,18 +125,16 @@ $cantidad=$total_suma/$cantidad;
 
 												</tr>
 											<?php } ?>
-										</tbody>
 
+
+										</tbody>
 									</table>
 								</td>
-
-								<td>$<?php echo $venta->totalVenta ?></td>
-
-
-
-								<td><a class="btn btn-danger" href="<?php echo "../../Controller/vender/eliminarVenta.php?id=" . $venta->idVenta ?>"><i class="fa fa-trash"></i></a></td>
+								<td>$<?php echo $compra->totalCompra ?></td>
+								<td><a class="btn btn-danger" href="<?php echo "../../Controller/comprar/eliminarCompra.php?id=" . $compra->idCompra ?>"><i class="fa fa-trash"></i></a></td>
 							</tr>
 						<?php } ?>
+
 						<tr>
 							<td></td>
 							<td></td>
@@ -140,12 +148,11 @@ $cantidad=$total_suma/$cantidad;
 							<td></td>
 							<td></td>
 							<td></td>
-							<th>$<?php echo $cantidad;?></th>
+							<th>$<?php echo $cantidad; ?></th>
 							<td></td>
 
 						</tr>
 					</tbody>
-
 				</table>
 
 			</div>
